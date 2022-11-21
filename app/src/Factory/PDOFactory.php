@@ -12,10 +12,10 @@ class PDOFactory implements Database
     private string $password;
 
     public function __construct(
-                                string $host = "",
-                                string $dbname = "",
-                                string $username = "",
-                                string $password = ""
+                                string $host = "database",
+                                string $dbname = "php_db",
+                                string $username = "root",
+                                string $password = "password"
                                 )
     {
         $this->host = $host;

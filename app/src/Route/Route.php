@@ -119,7 +119,7 @@ class Route
      * @param array $params
      * @return Route
      */
-    public function setParams(): array
+    public function setParams(array $params): Route
     {
         $this->params = $params;
 
@@ -151,7 +151,9 @@ class Route
     public function mergeParams(string $url)
     {
         // vient après match -> 
-        // 
+        // on associe -> clé / valeurs; 
+        // nom param -> valeur passée par user;
+
         preg_match("#{$this->path}#", $url, $match);
         array_shift($match);
 
@@ -163,6 +165,7 @@ class Route
         // this->path represente une string deja prete
         // si le param passé correspond au masque 
         //  -> renvoi true
+
         return (bool)preg_match("#^{$this->path}$#", $url);
     }
 }

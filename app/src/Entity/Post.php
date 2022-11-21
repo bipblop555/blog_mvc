@@ -4,7 +4,7 @@ namespace App\Entity;
 
 class Post extends BaseEntity
 {
-    private int $id;
+    private ?int $id = null;
     private string $content;
     private string $author;
 
@@ -47,18 +47,18 @@ class Post extends BaseEntity
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getAuthor(): int
+    public function getAuthor(): string
     {
         return $this->author;
     }
 
     /**
-     * @param int $author
+     * @param string $author
      * @return Post
      */
-    public function setAuthor(int $author): Post
+    public function setAuthor(string $author): Post
     {
         $this->author = $author;
         return $this;

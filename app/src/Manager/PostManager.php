@@ -11,7 +11,7 @@ class PostManager extends BaseManager
      */
     public function getAllPosts(): array
     {
-        $query = $this->pdo->query('SELECT * FROM Post');
+        $query = $this->pdo->query('SELECT * FROM Posts');
 
         $users = [];
 
@@ -21,5 +21,19 @@ class PostManager extends BaseManager
         }
 
         return $users;
+    }
+
+    public function insertPost(Post $post)
+    {
+        $query = $this->pdo->prepare('INSERT INTO Posts (content, author) VALUES (:content, :author)');
+
+        $query->bindValue(
+        "content", $post->getContent(), \PDO::PARAM_STR
+        );
+        $query->bindValue(
+        "author", $post->getAuthor(), \PDO::PARAM_STR
+        );
+
+        $query->execute();
     }
 }

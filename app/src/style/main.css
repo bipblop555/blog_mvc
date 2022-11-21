@@ -1,0 +1,11 @@
+h1{
+    color: red;
+    font-size: 3em;
+}
+#header{
+    background-color: red;
+}
+button{
+    width: 100px;
+    background-color: red;
+}
