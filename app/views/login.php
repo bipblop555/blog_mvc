@@ -5,7 +5,7 @@
             <input type ="text" name="username" placeholder="username"/>
             <input type="password" name ="password" placeholder="password"/>
             <button type="submit">submit</button>
-            <span>No account yet ? <a href="register.php">Subscribe now !</a></span>
+            <span>No account yet ? <a href="register">Subscribe now !</a></span>
         </form>
     </div>
     <div class="pic_div">

@@ -14,7 +14,7 @@
             <input type="password" name ="password" placeholder="password"/>
 
             <button type="submit">submit</button>
-            <!-- <span>No account yet ? <a href="register.php">Subscribe now !</a></span> -->
+            <span>Already have an account ? <a href="login">Login</a></span>
         </form>
     </div>
     <div class="pic_div">
