@@ -2,6 +2,9 @@
 
 use App\Route\Route;
 
+session_start();
+$id_session = session_id();
+
 require_once 'vendor/autoload.php';
 
 // session start
