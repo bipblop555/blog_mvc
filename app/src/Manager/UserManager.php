@@ -64,4 +64,10 @@ class UserManager extends BaseManager
 
         $query->execute();
     }
+
+    public function updateUser(User $user)
+    {
+        $query = $this->pdo->prepare('UPDATE `User` SET `roles`= ? WHERE `username`= ?');
+        $query->execute();
+    }
 }
