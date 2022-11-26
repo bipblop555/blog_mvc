@@ -1,0 +1,130 @@
+*{
+    font-family: Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+}
+/* REGISTER / LOGIN */
+
+.log_wrapper,
+.register_wrapper {
+    height: 98vh;
+    display: flex;
+    align-items: center;
+}
+.log_div,
+.register_div {
+    /* background: blue; */
+    width: 50%;
+    padding: 1em;
+}
+.log_div > .log_form > p,
+.log_div > .log_form > span,
+.register_div > .register_form > p
+{
+    margin: 0 auto;
+    padding: 1em;
+}
+.log_form,
+.register_form {
+    margin: 0 auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 2em;
+    padding: 1em;
+}
+input {
+    padding: 1em;
+    margin: .5em;
+    border-radius: 1em;
+    outline: none;
+    border: 1px solid lightgray;
+}
+button {
+    padding: 1em;
+    border-radius: 1em;
+    border: 1px solid lightgray;
+    outline: none;
+    cursor: pointer;
+    background-color: white;
+}
+button:hover {
+    background-color: black;
+    color: white;
+
+    transition: all 1s;
+}
+.pic_div {
+    width: 50%;
+    background: red;
+    height: 100%;
+}
+figure{
+    padding: 0;
+    margin: 0;
+}
+img{
+    height: 98vh;
+
+    max-width: 100%;
+    width: 100%;
+}
+
+/* HOME */
+.home_wrapper{
+    display: flex;
+}
+.nav_bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 15%;
+    border-right: 1px solid lightgray;
+    height: 98vh;
+}
+.nav_bar > svg {
+    width: 30px;
+}
+.nav_bar > h2{
+    margin: 0;
+}
+.home_span{
+    padding: 1em;
+}
+.home_content{
+    width: 85%;
+}
+span.separator {
+    width: 100%;
+    height: 2px;
+    /* background: red; */
+    border: 1px solid lightgray;
+    display: block;
+}
+.home_content_form_wrapper {
+    margin-top: 6em;
+}
+form.home_form {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    position: relative;
+}
+textarea#content {
+    border: 1px solid lightgray;
+    border-radius: 1em;
+    padding: 1em;
+    margin: 1em;
+    outline: none;
+}
+button.home_form_btn {
+    width: 25%;
+    margin: 1em;
+    position: absolute;
+    right: 0;
+    right: -11.4em;
+    bottom: 0;
+    height: 69%;
+}
