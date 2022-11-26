@@ -29,26 +29,29 @@ class PostController extends AbstractController
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            // on recup post_content on le 'nettoie'
+            date_default_timezone_set('UTC');
+            $messageDate = date("Y-m-d H:i:s");
+
             $_POST['content'] = htmlspecialchars($_POST['content']);
-            $_POST['author'] = $_SESSION['username'];
+            $_POST['username'] = $_SESSION['username'];
+            $_POST['date'] = $messageDate;
 
             $post = new Post($_POST); // on cree nouvelle instance de Post;
-            // trouver moyen de lui donner author;
-            // author =  $_POST['username'];
 
             var_dump($_POST);
-            die;
+            // die;
 
             $postManager = new PostManager(new PDOFactory());
 
             $postManager->insertPost($post);
+
+            $this->render('/home.php');
+
             exit;
         }
     }
-
-    #[Route('/home', name: "home", methods: ["GET"])]
-    public function toHome()
+    #[Route('/home', name: "home", methods: ["POST"])]
+    public function toPublish()
     {
         $this->render('/home.php');
     }
