@@ -10,34 +10,35 @@ use App\Route\Route;
 
 class PostController extends AbstractController
 {
-    #[Route('/', name: "home", methods: ["GET", "POST"])]
-    public function home()
-    {
-        $postManager = new PostManager(new PDOFactory());
-        $posts = $postManager->getAllPosts();
+    // #[Route('/', name: "home", methods: ["GET", "POST"])]
+    // public function home()
+    // {
+    //     $postManager = new PostManager(new PDOFactory());
+    //     $posts = $postManager->getAllPosts();
 
-        $this->render("home.php", [
-            "posts" => $posts,
-            "trucs" => "je suis une string",
-            "machin" => 42
-        ], "Tous les posts");
-    }
+    //     $this->render("home.php", [
+    //         "posts" => $posts,
+    //         "trucs" => "je suis une string",
+    //         "machin" => 42
+    //     ], "Tous les posts");
+    // }
 
     // testt
-    #[Route('/', name: "home", methods: ["POST"])]
+    #[Route('/home', name: "home", methods: ["POST"])]
     public function publish()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             // on recup post_content on le 'nettoie'
-            $_POST['post_content'] = htmlspecialchars($_POST['post_content']);
-            $_POST['author'] = $_POST['username'];
+            $_POST['content'] = htmlspecialchars($_POST['content']);
+            $_POST['author'] = $_SESSION['username'];
 
-            // on cree nouvelle instance de Post;
-            // trouver moyen de lui don ner author;
+            $post = new Post($_POST); // on cree nouvelle instance de Post;
+            // trouver moyen de lui donner author;
             // author =  $_POST['username'];
-            $post = new Post($_POST);
-            var_dump($post);
+
+            var_dump($_POST);
+            die;
 
             $postManager = new PostManager(new PDOFactory());
 
@@ -45,6 +46,13 @@ class PostController extends AbstractController
             exit;
         }
     }
+
+    #[Route('/home', name: "home", methods: ["GET"])]
+    public function toHome()
+    {
+        $this->render('/home.php');
+    }
+
     // test
 
     /**
