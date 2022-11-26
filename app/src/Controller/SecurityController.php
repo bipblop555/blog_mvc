@@ -1,6 +1,7 @@
 <?php
-
 namespace App\Controller;
+
+use App\style\main;
 
 use App\Entity\User;
 use App\Factory\PDOFactory;
@@ -9,69 +10,83 @@ use App\Route\Route;
 
 class SecurityController extends AbstractController
 {
-    #[Route('/login', name: "login", methods: ["POST"])]
+
+    // LOGIN
+
+    #[Route("/login", name: "login", methods: ["POST"])]
     public function login()
     {
-        $_POST['username'] = htmlspecialchars($_POST['username']);
+        $_POST["username"] = htmlspecialchars($_POST["username"]);
 
-        $_POST['password'] = htmlspecialchars($_POST['password']);
+        $_POST["password"] = htmlspecialchars($_POST["password"]);
+
+        $_SESSION['username'] = $_POST["username"];
+        $_SESSION['roles']= $_POST["roles"];
 
         $userManager = new UserManager(new PDOFactory());
-        $user = $userManager->getByUsername($_POST['username']);
-
+        $user = $userManager->getByUsername($_POST["username"]);
+        
         if (!$user)
         {
-            header('Location: /?error=notfound');
+            echo 'nope';
+            header("Location: /?error=notfound");
             exit;
         }
 
-        if ($user->passwordMatch($_POST['password']))
+        if ($user->passwordMatch($_POST["password"]))
         {
-            $this->render('/home.php', [
+            // header("Location: /home.php");
+            
+            $this->render("/home.php");
 
-                'message' => 'Connexion réussie'
-            ],
-                'Home'
-            ); 
-                exit;
+            exit;
         }
 
-        header('Location: /?error=not found');
+        header("Location: /?error=not found");
         exit;
-        var_dump('toto');
+        var_dump("Utilisateur non recoonu");
     }
 
-    #[Route('/login', name: "login", methods: ["GET"])]
+    #[Route("/login", name: "login", methods: ["GET"])]
     function toLogin()
     {
-        $this->render('/login.php');
+
+        $this->render("/login.php");
     }
 
 
-    #[Route('/register', name: 'register', methods: ['GET','POST'])]
+    // REGISTER
+    #[Route("/register", name: "register", methods: ["POST"])]
     public function register()
     {   
-    //var_dump($_SERVER);die;
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        var_dump($_SERVER);
 
-            // POST => tout ce qui est envoyé en POST
-            $_POST['roles'] = 0;
-            $_POST['username'] = htmlspecialchars($_POST['username']);
+        echo "kk";
+        // POST => tout ce qui est envoyé en POST
 
-            $_POST['password']= htmlspecialchars($_POST['password']);
+        $_POST["roles"] = 0;
+        $_POST["username"] = htmlspecialchars($_POST["username"]);
 
-            $user = new User($_POST);
-            // var_dump($_POST); die;
-            $userManager = new UserManager(new PDOFactory());
-                
-            $userManager->insertUser($user);
+        $_POST["password"]= htmlspecialchars($_POST["password"]);
 
-            header('Location: home.php');
-            exit;
-    }
-    // permet l'affichage
-        $this->render('register.php', [
-            'message' => 'trgrgrt'
-        ]);
+        $_SESSION['username'] = $_POST["username"];
+        $_SESSION['roles'] =  $_POST["roles"];
+
+        $user = new User($_POST);
+        $userManager = new UserManager(new PDOFactory());
+            
+        $userManager->insertUser($user);
+
+        // permet l"affichage
+        // header('Location: /home.php');
+        $this->render("/home.php");
+
+        exit;
+    } 
+
+    #[Route("/register", name: "register", methods: ["GET"])]
+    function toRegister()
+    {
+        $this->render("/register.php");
     }
 }
