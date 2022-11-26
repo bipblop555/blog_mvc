@@ -58,4 +58,9 @@ foreach ($routesObj as $route) {
     exit();
 }
 echo 'index.php';
-
+?>
+<h1>Welcome !</h1>
+<div class="index_div">
+    <a href='login'>login</a>
+    <a href='register'>register</a>
+</div>
