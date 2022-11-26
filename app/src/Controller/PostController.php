@@ -4,24 +4,21 @@ namespace App\Controller;
 
 use App\Factory\PDOFactory;
 use App\Manager\PostManager;
-use App\Manager\UserManager;
 use App\Entity\Post;
 use App\Route\Route;
 
 class PostController extends AbstractController
 {
-    // #[Route('/', name: "home", methods: ["GET", "POST"])]
-    // public function home()
-    // {
-    //     $postManager = new PostManager(new PDOFactory());
-    //     $posts = $postManager->getAllPosts();
+    #[Route('/home', name: "home", methods: ["GET", "POST"])]
+    public function showAll()
+    {
+        $postManager = new PostManager(new PDOFactory());
+        $fetchedPosts[] = $postManager->getAllPosts();
 
-    //     $this->render("home.php", [
-    //         "posts" => $posts,
-    //         "trucs" => "je suis une string",
-    //         "machin" => 42
-    //     ], "Tous les posts");
-    // }
+        $this->render("home.php");
+
+        return $fetchedPosts;
+    }
 
     // testt
     #[Route('/home', name: "home", methods: ["POST"])]

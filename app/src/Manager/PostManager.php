@@ -11,16 +11,19 @@ class PostManager extends BaseManager
      */
     public function getAllPosts(): array
     {
-        $query = $this->pdo->query('SELECT * FROM Posts');
+        $query = $this->pdo->prepare('SELECT * FROM `Posts` ORDER BY `published` DESC');
 
-        $users = [];
+        $query->execute();
 
-        while ($data = $query->fetch(\PDO::FETCH_ASSOC)){
+        while ($data = $query->fetchAll(\PDO::FETCH_ASSOC)){
 
-            $users[] = new Post($data);
+            $fetchedPosts[] = new Post($data);
         }
 
-        return $users;
+        $fetchedPosts = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+
+        return $fetchedPosts;
     }
 
     public function insertPost(Post $post)

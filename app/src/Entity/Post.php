@@ -9,6 +9,8 @@ class Post extends BaseEntity
     private string $username;
     private string $date;
 
+    private array $fetchedPosts;
+
     /**
      * @return int
      */
@@ -81,6 +83,25 @@ class Post extends BaseEntity
     public function setDate(string $date): Post
     {
         $this->date = $date;
+        return $this;
+    }
+
+    /**
+     * @param array $fetchedPosts
+     * @return array
+     */
+    public function getfetchedPosts(): array
+    {
+        return $this->fetchedPosts;
+    }
+
+    /**
+     * @param array $fetchedPosts
+     * @return void
+     */
+    public function setfetchedPosts(array $fetchedPosts)
+    {
+        $this->fetchedPosts = $fetchedPosts;
         return $this;
     }
 }

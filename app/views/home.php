@@ -28,12 +28,11 @@ var_dump($_SESSION);
             </form>
         </div>
         <p>posts {}</p>
-        <?php 
-        // foreach ($posts as $post)
-        // {
-        //     echo $post->getContent();
-        // }
-        ?>
+        <?php foreach($fetchedPosts as $fetchedPost): ?>
+            <p class="date">
+                <?= $fetchedPost['content']?>
+            </p>
+    <?php endforeach; ?>
     </div>
 </div>
 
@@ -41,7 +40,7 @@ var_dump($_SESSION);
 
 /** 
  * @var App\Entity\Post[] 
- * $posts 
+ * $fetchedPosts 
 */
 
 
