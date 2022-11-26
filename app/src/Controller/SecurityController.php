@@ -21,7 +21,7 @@ class SecurityController extends AbstractController
         $_POST["password"] = htmlspecialchars($_POST["password"]);
 
         $_SESSION['username'] = $_POST["username"];
-        $_SESSION['roles']= $_POST["roles"];
+        $_SESSION['roles']= 0;
 
         $userManager = new UserManager(new PDOFactory());
         $user = $userManager->getByUsername($_POST["username"]);
@@ -61,7 +61,6 @@ class SecurityController extends AbstractController
     {   
         var_dump($_SERVER);
 
-        echo "kk";
         // POST => tout ce qui est envoyé en POST
 
         $_POST["roles"] = 0;
@@ -80,7 +79,6 @@ class SecurityController extends AbstractController
         // permet l"affichage
         // header('Location: /home.php');
         $this->render("/home.php");
-
         exit;
     } 
 
@@ -88,5 +86,37 @@ class SecurityController extends AbstractController
     function toRegister()
     {
         $this->render("/register.php");
+    }
+
+    // PROFILE
+    #[Route("/profile", name: "profile", methods: ["GET"])]
+    public function toProfile()
+    {
+        $this->render("profile.php");
+    }
+    // #[Route("/profile", name: "profile", methods: ["POST"])]
+    // public function profile()
+    // {
+    //     $_POST["roles"] = 1;
+
+    //     $_SESSION['username'] = $_POST["username"];
+    //     $_SESSION['roles'] =  $_POST["roles"];
+
+    //     $user = new User($_POST);
+    //     $userManager = new UserManager(new PDOFactory());
+            
+    //     $userManager->insertUser($user);
+
+    //     // permet l"affichage
+    //     // header('Location: /home.php');
+    //     $this->render("/home.php");
+    //     exit;
+    //     $this->render("profile.php");
+
+    // }
+    #[Route('/home', name: "home", methods: ["GET"])]
+    public function toHome()
+    {
+        $this->render('/home.php');
     }
 }
