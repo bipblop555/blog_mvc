@@ -11,9 +11,6 @@ abstract class AbstractController
         }
         call_user_func_array([$this, $action], $params);
 
-        if(isset($_SESSION)){
-            session_start();
-        }
     }
 
     public function render(string $view, array $args = [], string $title = "Document")
