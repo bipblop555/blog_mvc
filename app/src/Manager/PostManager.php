@@ -28,13 +28,13 @@ class PostManager extends BaseManager
             $post = new Post($fetchedPosts);
 
             $posts[] =  [
+                
+                "id" => $post->getId(),
+                "post_title" => $post->getpost_title(),
                 "content" => $post->getContent(),
                 "username" => $post->getUsername(),
                 "date" => $post->getDate()
             ];
-
-            print_r($posts);
-
         }
 
         return $posts;
@@ -42,8 +42,11 @@ class PostManager extends BaseManager
 
     public function insertPost(Post $post)
     {
-        $query = $this->pdo->prepare('INSERT INTO Posts (content, username, date) VALUES (:content, :username, :date)');
+        $query = $this->pdo->prepare('INSERT INTO Posts (post_title, content, username, date) VALUES (:post_title, :content, :username, :date)');
 
+        $query->bindValue(
+            "post_title", $post->getpost_title(), \PDO::PARAM_STR
+        );
         $query->bindValue(
             "content", $post->getContent(), \PDO::PARAM_STR
         );
@@ -52,6 +55,17 @@ class PostManager extends BaseManager
         );
         $query->bindValue(
             "date", $post->getDate(), \PDO::PARAM_STR
+        );
+
+        $query->execute();
+    }
+
+    public function deletePost($id)
+    {
+        $query = $this->pdo->prepare('DELETE FROM `Posts` WHERE `id` = :id');
+
+        $query->bindValue(
+            "id", $id, \PDO::PARAM_STR
         );
 
         $query->execute();

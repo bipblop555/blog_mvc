@@ -1,5 +1,5 @@
 <?php
-
+var_dump($_SESSION);
 ?>
 <div class="home_wrapper">
     <div class="nav_bar">
@@ -21,24 +21,34 @@
     <div class="home_content">
         <div class="home_content_form_wrapper">
             <form action='/home' method='POST' class="home_form">
-                <textarea name="content" id="content"></textarea>
+                <input type="text" name="post_title" id="post_title" placeholder="Titre du post"/>
+                <textarea name="content" id="content" placeholder="contenu"></textarea>
                 <button type="submit" class="home_form_btn">Poster</button>
             </form>
         </div>
         <p>posts {}</p>
         <?php foreach($fetchedPosts as $fetchedPost): ?>
-                <p class="date"> 
+            <div class="post_wrapper">
+            <h2><?= $fetchedPost['post_title']?></h2>
+                <a href="/profile">
+                    <span class="username">
+                        <?= $fetchedPost['username']?>
+                    </span>
+                </a>
+                <span class="content">
                     <?= $fetchedPost['content']?>
-                </p>
-                <p>
-                    <?= $fetchedPost['username']?>
-                </p>
-            <?php endforeach; ?>
+                </span>
+                <span class="date"> 
+                    <?= $fetchedPost['date']?>
+                </span>
+            </div>
+            <a href="/post/delete/<?=$fetchedPost['id']?>">Supprimer </a>
+        <?php endforeach; ?>
     </div>
 </div>
 
 <?php
-
+print_r($fetchedPosts);
 /** 
  * @var App\Entity\Post[] 
  * $fetchedPosts 

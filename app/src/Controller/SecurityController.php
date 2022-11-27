@@ -30,15 +30,14 @@ class SecurityController extends AbstractController
         {
             echo 'nope';
             header("Location: /?error=notfound");
-
             exit;
         }
 
         if ($user->passwordMatch($_POST["password"]))
         {
-            // header("Location: /home");
+            // header("Location: /home.php");
             
-            $this->render("home.php");
+            $this->render("/home.php");
 
             exit;
         }
@@ -51,7 +50,7 @@ class SecurityController extends AbstractController
     function toLogin()
     {
 
-        $this->render("login.php");
+        $this->render("/login.php");
     }
 
 
@@ -92,26 +91,21 @@ class SecurityController extends AbstractController
     {
         $this->render("profile.php");
     }
-    // #[Route("/profile", name: "profile", methods: ["POST"])]
-    // public function profile()
-    // {
-    //     $_POST["roles"] = 1;
 
-    //     $_SESSION['username'] = $_POST["username"];
-    //     $_SESSION['roles'] =  $_POST["roles"];
+    #[Route('/update', name: "profile", methods: ["UPDATE"])]
+    public function updateRole($roles)
+    {
+        $_POST['roles'] = 1;
 
-    //     $user = new User($_POST);
-    //     $userManager = new UserManager(new PDOFactory());
-            
-    //     $userManager->insertUser($user);
+        $roles = $_POST['roles'];
 
-    //     // permet l"affichage
-    //     // header('Location: /home.php');
-    //     $this->render("/home.php");
-    //     exit;
-    //     $this->render("profile.php");
+        $user = new UserManager(new PDOFactory());
 
-    // }
+        $user->updateUser($roles);
+
+        header('Location: /home');
+    }
+
     #[Route('/home', name: "home", methods: ["GET"])]
     public function toHome()
     {

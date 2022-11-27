@@ -8,10 +8,14 @@
         <?php
         if ($_SESSION['roles'] != 1){
             echo'<p class="role">Aucun droit administrateur</p>';
+        } else {
+            'echo <p class="role">Droit Admin niveau 1</p>';
         }
         ?>
         <span>Je souhaite être admin :</span>
-        <button>faire la demande</button>
+        <a href="/profile">
+            <button>faire la demande</button>
+        </a>
         <a href="home">
             <span class="home_span">home</span>
         </a>

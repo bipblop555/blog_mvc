@@ -1,6 +1,6 @@
 <div class="log_wrapper">
     <div class="log_div">
-        <form action="/home" method="POST" class="log_form">
+        <form action="" method="POST" class="log_form">
             <p>Login</p>
             <input type ="text" name="username" placeholder="username"/>
             <input type="password" name ="password" placeholder="password"/>

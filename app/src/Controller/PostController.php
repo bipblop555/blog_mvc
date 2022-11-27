@@ -34,6 +34,8 @@ class PostController extends AbstractController
             date_default_timezone_set('UTC');
             $messageDate = date("Y-m-d H:i:s");
 
+            $_POST['post_title'] = htmlspecialchars($_POST['post_title']);
+
             $_POST['content'] = htmlspecialchars($_POST['content']);
             $_POST['username'] = $_SESSION['username'];
             $_POST['date'] = $messageDate;
@@ -50,14 +52,11 @@ class PostController extends AbstractController
         }
     }
 
-
     #[Route('/home', name: "home", methods: ["GET"])]
     public function toPublish()
     {
         $this->render('/home.php');
     }
-
-    // test
 
     /**
      * @param $id
@@ -65,9 +64,20 @@ class PostController extends AbstractController
      * @param $machin
      * @return void
      */
-    #[Route('/post/{id}/{truc}/{machin}', name: "francis", methods: ["GET"])]
-    public function showOne($id, $truc, $machin)
-    {        var_dump($_SERVER);
+    #[Route('/post/{id}', name: "update", methods: ["UPDATE"])]
+    public function showOne($id)
+    {  
+        
+    }   
+
+    #[Route('/post/delete/{id}', name: "update", methods: ["GET"])]
+    public function remove($id)
+    {
+        $post = new PostManager(new PDOFactory());
+
+        $post->deletePost($id);
+
+        header('Location: /home');
 
     }
 

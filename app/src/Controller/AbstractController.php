@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+
 abstract class AbstractController
 {
+    
     public function __construct(string $action, array $params = [])
     {
         if (!is_callable([$this, $action])) {
@@ -33,6 +36,10 @@ abstract class AbstractController
         require_once $base;
 
         exit;
+    }
+
+    public function getUser() : ?User {
+        return isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
     }
 }
 

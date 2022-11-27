@@ -5,6 +5,8 @@ namespace App\Entity;
 class Post extends BaseEntity
 {
     private ?int $id = null;
+    private string $post_title;
+
     private string $content;
     private string $username;
     private string $date;
@@ -27,7 +29,24 @@ class Post extends BaseEntity
         
         return $this;
     }
+    /**
+     * @return string
+     */
+    public function getpost_title(): string 
+    {
+        return $this->post_title;
+    }
 
+    /**
+     * @return string $post_title
+     * @return Post
+     */
+    public function setpost_title(string $post_title): Post
+    {
+        $this->post_title = $post_title;
+
+        return $this;
+    }
     /**
      * @return string
      */
