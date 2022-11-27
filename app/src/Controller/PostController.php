@@ -3,21 +3,26 @@
 namespace App\Controller;
 
 use App\Factory\PDOFactory;
-use App\Manager\PostManager;
 use App\Entity\Post;
+use App\Manager\PostManager;
 use App\Route\Route;
 
 class PostController extends AbstractController
 {
-    #[Route('/home', name: "home", methods: ["GET", "POST"])]
+    #[Route('/home', name: "home", methods: ["GET"])]
     public function showAll()
     {
         $postManager = new PostManager(new PDOFactory());
-        $fetchedPosts[] = $postManager->getAllPosts();
 
-        $this->render("home.php");
+        $fetchedPosts = $postManager->getAllPosts();
 
-        return $fetchedPosts;
+        // print_r($fetchedPosts);die;
+        
+        $this->render("home.php", [
+            'fetchedPosts'=>$fetchedPosts
+        ]);
+        // return $fetchedPosts;
+    
     }
 
     // testt
@@ -35,19 +40,18 @@ class PostController extends AbstractController
 
             $post = new Post($_POST); // on cree nouvelle instance de Post;
 
-            var_dump($_POST);
-            // die;
-
             $postManager = new PostManager(new PDOFactory());
 
             $postManager->insertPost($post);
 
-            $this->render('/home.php');
+            $this->showAll();
 
-            exit;
+            // exit;
         }
     }
-    #[Route('/home', name: "home", methods: ["POST"])]
+
+
+    #[Route('/home', name: "home", methods: ["GET"])]
     public function toPublish()
     {
         $this->render('/home.php');
@@ -63,8 +67,8 @@ class PostController extends AbstractController
      */
     #[Route('/post/{id}/{truc}/{machin}', name: "francis", methods: ["GET"])]
     public function showOne($id, $truc, $machin)
-    {
-        var_dump($id, $truc);
+    {        var_dump($_SERVER);
+
     }
 
 }
