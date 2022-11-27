@@ -8,7 +8,7 @@
 
 <div class="register_wrapper">
     <div class="register_div">
-        <form action="" method="POST" class="register_form">
+        <form action="/home" method="POST" class="register_form">
             <p>register</p>
             <input type ="text" name="username" placeholder="username"/>
             <input type="password" name ="password" placeholder="password"/>
@@ -23,3 +23,4 @@
         </figure>
     </div>
 </div>
+

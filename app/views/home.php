@@ -1,7 +1,5 @@
 <?php
 
-var_dump($_SESSION);
-
 ?>
 <div class="home_wrapper">
     <div class="nav_bar">
@@ -22,17 +20,20 @@ var_dump($_SESSION);
     </div>
     <div class="home_content">
         <div class="home_content_form_wrapper">
-            <form method='POST' class="home_form">
+            <form action='/home' method='POST' class="home_form">
                 <textarea name="content" id="content"></textarea>
-                <button class="home_form_btn">Poster</button>
+                <button type="submit" class="home_form_btn">Poster</button>
             </form>
         </div>
         <p>posts {}</p>
         <?php foreach($fetchedPosts as $fetchedPost): ?>
-            <p class="date">
-                <?= $fetchedPost['content']?>
-            </p>
-    <?php endforeach; ?>
+                <p class="date"> 
+                    <?= $fetchedPost['content']?>
+                </p>
+                <p>
+                    <?= $fetchedPost['username']?>
+                </p>
+            <?php endforeach; ?>
     </div>
 </div>
 

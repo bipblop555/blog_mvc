@@ -30,28 +30,28 @@ class SecurityController extends AbstractController
         {
             echo 'nope';
             header("Location: /?error=notfound");
+
             exit;
         }
 
         if ($user->passwordMatch($_POST["password"]))
         {
-            // header("Location: /home.php");
+            // header("Location: /home");
             
-            $this->render("/home.php");
+            $this->render("home.php");
 
             exit;
         }
 
         header("Location: /?error=not found");
         exit;
-        var_dump("Utilisateur non recoonu");
     }
 
     #[Route("/login", name: "login", methods: ["GET"])]
     function toLogin()
     {
 
-        $this->render("/login.php");
+        $this->render("login.php");
     }
 
 
@@ -59,8 +59,6 @@ class SecurityController extends AbstractController
     #[Route("/register", name: "register", methods: ["POST"])]
     public function register()
     {   
-        var_dump($_SERVER);
-
         // POST => tout ce qui est envoyé en POST
 
         $_POST["roles"] = 0;
