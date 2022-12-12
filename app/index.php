@@ -1,15 +1,17 @@
 <?php
 
 use App\Route\Route;
+use App\Traits\FileParser;
+
+header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Headers: authorization");
+// header("Content-Type: application/json");
 
 session_start();
 $id_session = session_id();
 
 require_once 'vendor/autoload.php';
-
-// session start
-// if ($_SESSION)
-// sesion start
 
 $controllerDir = dirname(__FILE__) . '/src/Controller';
 $dirs = scandir($controllerDir);
@@ -64,3 +66,4 @@ echo 'index.php';
     <a href='login'>login</a>
     <a href='register'>register</a>
 </div>
+

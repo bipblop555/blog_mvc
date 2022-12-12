@@ -1,4 +1,4 @@
-FROM php:8.1.2-apache
+FROM php:8.1-apache
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql \
     && a2enmod rewrite
@@ -9,4 +9,5 @@ RUN apt-get update -y \
 
 RUN curl -sS https://getcomposer.org/installer | php -- \
     && mv composer.phar /usr/local/bin/composer
+
 

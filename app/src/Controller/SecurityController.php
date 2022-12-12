@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\style\main;
@@ -7,6 +8,8 @@ use App\Entity\User;
 use App\Factory\PDOFactory;
 use App\Manager\UserManager;
 use App\Route\Route;
+
+use App\Utilitaire\JWTHelper;
 
 class SecurityController extends AbstractController
 {
@@ -23,19 +26,22 @@ class SecurityController extends AbstractController
         $_SESSION['username'] = $_POST["username"];
         $_SESSION['roles']= 0;
 
+        
         $userManager = new UserManager(new PDOFactory());
         $user = $userManager->getByUsername($_POST["username"]);
+        
+        $jwt = JWTHelper::buildJWT($user);
         
         if (!$user)
         {
             echo 'nope';
-            header("Location: /?error=notfound");
+            // header("Location: /?error=notfound");
             exit;
         }
 
         if ($user->passwordMatch($_POST["password"]))
         {
-            // header("Location: /home.php");
+            // header("Location: /home");
             
             $this->render("/home.php");
 

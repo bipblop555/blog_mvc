@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 
+
+
+
 abstract class AbstractController
 {
     
@@ -41,5 +44,6 @@ abstract class AbstractController
     public function getUser() : ?User {
         return isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
     }
+
 }
 

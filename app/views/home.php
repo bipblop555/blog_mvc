@@ -1,58 +1,20 @@
 <?php
-var_dump($_SESSION);
+
+    use Firebase\JWT\JWT;
+    use Firebase\JWT\Key;
+
+    $key = uniqid('key', false);
+    $payload = [
+        'iss' => 'http://localhost:3000',
+        'aud' => 'http://localhost:5656',
+        'iat' => time(),
+    ];
+    $jwt = JWT::encode($payload, $key, 'HS256');
+
+    $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
+    echo json_encode([
+        "jxt" => $jwt
+    ]);
+    die;
 ?>
-<div class="home_wrapper">
-    <div class="nav_bar">
-        <div class="user_info">
-            <a href="profile">
-                <span class="home_span">mon espace</span>
-            </a>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z"/>
-            </svg>
-            <h2 class="home_span"> <?= $_SESSION['username']?> </h2>
-            <?php
-            if ($_SESSION['roles'] != 1){
-                echo'<p>Aucun droit administrateur</p>';
-            }
-            ?>
-        </div>
-    </div>
-    <div class="home_content">
-        <div class="home_content_form_wrapper">
-            <form action='/home' method='POST' class="home_form">
-                <input type="text" name="post_title" id="post_title" placeholder="Titre du post"/>
-                <textarea name="content" id="content" placeholder="contenu"></textarea>
-                <button type="submit" class="home_form_btn">Poster</button>
-            </form>
-        </div>
-        <p>posts {}</p>
-        <?php foreach($fetchedPosts as $fetchedPost): ?>
-            <div class="post_wrapper">
-            <h2><?= $fetchedPost['post_title']?></h2>
-                <a href="/profile">
-                    <span class="username">
-                        <?= $fetchedPost['username']?>
-                    </span>
-                </a>
-                <span class="content">
-                    <?= $fetchedPost['content']?>
-                </span>
-                <span class="date"> 
-                    <?= $fetchedPost['date']?>
-                </span>
-            </div>
-            <a href="/post/delete/<?=$fetchedPost['id']?>">Supprimer </a>
-        <?php endforeach; ?>
-    </div>
-</div>
-
-<?php
-print_r($fetchedPosts);
-/** 
- * @var App\Entity\Post[] 
- * $fetchedPosts 
-*/
-
-
 

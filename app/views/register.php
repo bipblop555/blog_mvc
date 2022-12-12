@@ -1,11 +1,4 @@
 
-<!-- <form method="POST">
-    <input type ="text" name="username" placeholder="username"/>
-    <input type="password" name ="password" placeholder="password"/>
-    <button class="button is-primary">Envoyer !</button>
-</form>  -->
-
-
 <div class="register_wrapper">
     <div class="register_div">
         <form action="" method="POST" class="register_form">
